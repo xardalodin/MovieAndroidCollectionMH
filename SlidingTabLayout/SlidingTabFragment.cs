@@ -94,7 +94,7 @@ namespace SlidingTabLayout
                     View view = LayoutInflater.From(container.Context).Inflate(Resource.Layout.layout_Server_config, container, false);
                     container.AddView(view);
 
-                    TxtServerId = view.FindViewById<TextView>(Resource.Id.txtServerId);
+                    TxtServerId =(EditText)view.FindViewById(Resource.Id.txtServerId);
                     Button BtnServer = view.FindViewById<Button>(Resource.Id.btnServer);
 
                     BtnServer.Click += BtnServer_Click;
@@ -121,7 +121,7 @@ namespace SlidingTabLayout
 
             private async void BtnServer_Click(object sender, EventArgs e)
             {
-                string uribuild = "http://192.168.1.2:8080/simpleserver/";
+                string uribuild = "http://"+TxtServerId.Text+"/simpleserver/";
                 Uri uri = new Uri(uribuild);
                 backend.Movie_Json_Services service = new backend.Movie_Json_Services();
                 IEnumerable<backend.movie> mov = await service.GetMoviesServer(uri);

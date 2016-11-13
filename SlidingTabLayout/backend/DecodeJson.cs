@@ -17,8 +17,19 @@ namespace SlidingTabLayout.backend
     {
         public static IEnumerable<backend.movie> DecodeJsonString(string json)
         {
-            backend.movies mov = JsonConvert.DeserializeObject<backend.movies>(json);
-            return mov.ListOfMovies;
+            try
+            {
+                backend.movies mov = JsonConvert.DeserializeObject<backend.movies>(json);
+                return mov.ListOfMovies;
+            }
+            catch
+            {
+                backend.movies mov2 = new backend.movies();
+                backend.movie error = new backend.movie() { Movie = "error", Length = "wrong", Format = "Format" };
+                List<movie> listOfMovie = new List<movie>();
+                listOfMovie.Add(error);
+                return listOfMovie;
+            }
         }
 
     }
